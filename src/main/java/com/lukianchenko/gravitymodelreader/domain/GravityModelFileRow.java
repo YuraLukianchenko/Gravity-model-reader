@@ -11,10 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GravityModelFileRow {
 
-    private int order;
-    private int degree;
-    private int CoefficientC;
-    private int CoefficientS;
-    private int dC;
-    private int dS;
+  private int order;
+  private int degree;
+  private int CoefficientC;
+  private int CoefficientS;
+  private int dC;
+  private int dS;
 }

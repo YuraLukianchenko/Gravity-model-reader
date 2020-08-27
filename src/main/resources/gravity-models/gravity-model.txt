@@ -1,0 +1,203 @@
+The e(X)perimental (G)ravity field (M)odel XGM2019e
+========================================================================
+
+These data are freely available under the Creative Commons Attribution
+4.0 International Licence (CC BY 4.0). When using the data please cite:
+
+Zingerle, Philipp; Pail, Roland; Gruber, Thomas; Oikonomidou, Xanthi
+(2019): The experimental gravity field model XGM2019e. GFZ Data
+Services. http://doi.org/10.5880/ICGEM.2019.007
+
+Abstract:
+XGM2019e is a combined global gravity field model represented through
+spheroidal harmonics up to d/o 5399, corresponding to a spatial
+resolution of 2’ (~4 km). As data sources it includes the satellite
+model GOCO06s in the longer wavelength area combined with terrestrial
+measurements for the shorter wavelengths. The terrestrial data itself
+consists over land and ocean of gravity anomalies provided by courtesy
+of NGA (identical to XGM2016, having a resolution of 15’) augmented with
+topographically derived gravity over land (EARTH2014). Over the oceans,
+gravity anomalies derived from satellite altimetry are used (DTU13, in
+consistency with the NGA dataset).
+
+The combination of the satellite data with the terrestrial observations
+is performed by using full normal equations up to d/o 719 (15’).
+Beyond d/o 719, a block-diagonal least-squares solution is calculated
+for the high-resolution terrestrial data (from topography and
+altimetry). All calculations are performed in the spheroidal harmonic
+domain.
+
+In the spectral band up to d/o 719 the new model shows over land a
+slightly improved behavior over preceding models such as XGM2016,
+EIGEN6c4 or EGM2008 when comparing it to independent GPS leveling data.
+Over land and in the spectral range above d/o 719 the accuracy of
+XGM2019e slightly suffers from the sole use oftopographic forward
+modelling; Hence, errors are increased in well-surveyed areas compared
+to models containing real gravity data, e.g. EIGEN6c4 or EGM2008.
+However, the performance of XGM2019e can be considered as globally more
+homogeneous and independent from existing high resolution global models.
+Over the oceans the model exhibits an improved performance throughout
+the complete spectrum (equal or better than preceding models).
+
+Advice for users:
+To comply with the ICGEM standard, the model coefficients are provided
+in the spherical harmonic domain. To simplify the utilization of the
+model, coefficients are precalculated in three different spectral
+resolution scales (in the spheroidal harmonic domain, then converted
+back to spherical harmonics, thus, avoiding truncation errors near the
+spheroidal surface):
+
+  model name  |  spheroidal harmonic d/o  |  spherical harmonic d/o  |  permanent link to spherical harmonic model
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+XGM2019e      |            5399           |            5540          |  http://icgem.gfz-potsdam.de/getmodel/gfc/8e01a2aba4f291ac0638b79a390155713b70fdc9b266981023c756839c11c9b8/XGM2019e.gfc
+XGM2019e_2159 |            2159           |            2190          |  http://icgem.gfz-potsdam.de/getmodel/gfc/eeb03971cf6e533e6eeb6b010336463286dcda0846684248d5530acf8e800055/XGM2019e_2159.gfc
+XGM2019       |             719           |             760          |  http://icgem.gfz-potsdam.de/getmodel/gfc/38f8a3efe050bab49acaa41f9624e564d5288260188b6511a063597efaa4dc99/XGM2019.gfc
+
+While XGM2019e_2159 is provided directly through ICGEM, the other models
+can be found under the permanent link given in the table above.
+
+
+References:
+
+Kvas, A.; T. Mayer-Gürr; S. Krauss; J. M. Brockmann; T. Schubert; W.-D.
+Schuh; R. Pail; T. Gruber; A. Jäggi; U. Meyer (2019): The satellite-
+only gravity field model GOCO06s. GFZ Data Services.
+http://doi.org/10.5880/ICGEM.2019.002.
+
+Pail, R.; T. Fecher; D. Barnes; J. Factor; S. Holmes; T. Gruber; P.
+Zingerle (2017): The experimental gravity field model XGM2016. GFZ Data
+Services. http://doi.org/10.5880/icgem.2017.003.
+
+Hirt, C.; M. Rexer (2015): Earth2014: 1 arc-min shape, topography,
+bedrock and ice-sheet models–available as gridded data and degree-10,800
+spherical harmonics. International Journal of Applied Earth Observation
+and Geoinformation 39: 103-112.
+
+Andersen, O.; P. Knudsen; L. Stenseng (2015): The DTU13 MSS (Mean Sea
+Surface) and MDT (Mean Dynamic Topography) from 20 Years of Satellite
+Altimetry. IGFS 2014, 111–121. http://doi.org/10.1007/1345_2015_182.
+
+Pavlis, N. K.; S. A. Holmes; S. C. Kenyon; J. K. Factor (2012): The
+development and evaluation of the Earth Gravitational Model 2008
+(EGM2008). Journal of geophysical research: solid earth, 117(B4).
+
+Förste, C.; S. L. Bruinsma; O. Abrikosov; J.-M. Lemoine; J. C. Marty; F.
+Flechtner; G. Balmino; F. Barthelmes; R. Biancale (2014): EIGEN-6C4 The
+latest combined global gravity field model including GOCE data up to
+degree and order 2190 of GFZ Potsdam and GRGS Toulouse. GFZ Data
+Services. http://doi.org/10.5880/icgem.2015.1.
+
+
+A short note with the title 'The combined global gravity field model
+XGM2019e' is planned for publication. Check the icgem webpage for an
+update.
+
+
+begin_of_head ======================================================================================================
+product_type                gravity_field
+modelname                   XGM2019e
+earth_gravity_constant      3.986004415E+14
+radius                      6378136.3
+max_degree                  5540
+errors                      formal
+norm                        fully_normalized
+tide_system                 zero_tide
+
+key      L     M                        C                        S                  sigma C                  sigma S
+end_of_head ========================================================================================================
+gfc      0     0    1.000000000000000E+00    0.000000000000000E+00    0.000000000000000E+00    0.000000000000000E+00
+gfc      1     0    0.000000000000000E+00    0.000000000000000E+00    0.000000000000000E+00    0.000000000000000E+00
+gfc      1     1    0.000000000000000E+00    0.000000000000000E+00    0.000000000000000E+00    0.000000000000000E+00
+gfc      2     0   -4.841694947475625E-04    0.000000000000000E+00    6.678382494792630E-13    0.000000000000000E+00
+gfc      2     1   -3.383542932486571E-10    1.453655783967112E-09    5.916783537021555E-13    8.308117431180173E-13
+gfc      2     2    2.439370331756250E-06   -1.400307649958125E-06    8.117529944828666E-13    9.254489422410342E-13
+gfc      3     0    9.571725961869197E-07    0.000000000000000E+00    5.951808826070763E-13    0.000000000000000E+00
+gfc      3     1    2.030446476292952E-06    2.482421313943252E-07    5.388408589044074E-13    6.441494380039688E-13
+gfc      3     2    9.047584627480751E-07   -6.190122923360179E-07    6.271797390003890E-13    5.944394832999539E-13
+gfc      3     3    7.212947775067974E-07    1.414402115502222E-06    7.175360730869640E-13    7.359919057996194E-13
+gfc      4     0    5.399778363124431E-07    0.000000000000000E+00    4.797169074258789E-13    0.000000000000000E+00
+gfc      4     1   -5.362002011701568E-07   -4.735821391840940E-07    4.432572205949591E-13    5.346425041802514E-13
+gfc      4     2    3.504942725689197E-07    6.625042503828948E-07    4.894427649706212E-13    4.869894460507584E-13
+gfc      4     3    9.908652601148434E-07   -2.009445816118928E-07    4.953408167706178E-13    5.411182640426318E-13
+gfc      4     4   -1.884946051823713E-07    3.088300553787078E-07    5.852535148399493E-13    6.155983782257706E-13
+gfc      5     0    6.863789456281855E-08    0.000000000000000E+00    3.977531154609689E-13    0.000000000000000E+00
+gfc      5     1   -6.291531272040994E-08   -9.431275025508364E-08    3.595139862548084E-13    4.759170708926263E-13
+gfc      5     2    6.520451251879030E-07   -3.233329796973922E-07    3.765520419244632E-13    4.315763268658630E-13
+gfc      5     3   -4.518373000734838E-07   -2.149376790899368E-07    4.201503368502120E-13    4.177300969142837E-13
+gfc      5     4   -2.953094047976561E-07    4.981177985218646E-08    4.524200737782766E-13    4.382724718771913E-13
+gfc      5     5    1.748149277589179E-07   -6.693596530389165E-07    5.372471556964734E-13    5.067869994711077E-13
+gfc      6     0   -1.499836903807493E-07    0.000000000000000E+00    3.456795185009898E-13    0.000000000000000E+00
+gfc      6     1   -7.596609886316533E-08    2.653014775551234E-08    3.255796808414755E-13    3.963442502589277E-13
+gfc      6     2    4.863203773286407E-08   -3.737565650251207E-07    3.419321373527875E-13    3.778193823320776E-13
+gfc      6     3    5.725245628263242E-08    8.996249380387000E-09    3.512505060108316E-13    3.616886711604833E-13
+gfc      6     4   -8.599279970283426E-08   -4.714295672809378E-07    3.533245088251725E-13    3.697029965431611E-13
+gfc      6     5   -2.671631952338678E-07   -5.364979466889858E-07    3.834449974891797E-13    3.858148008514916E-13
+gfc      6     6    9.477682286748911E-09   -2.373836192496827E-07    4.405166657158787E-13    4.238597795373289E-13
+gfc      7     0    9.048923326225471E-08    0.000000000000000E+00    3.159292344599591E-13    0.000000000000000E+00
+gfc      7     1    2.808820041259942E-07    9.518930185842902E-08    2.755094801318409E-13    3.462182064174286E-13
+gfc      7     2    3.303774805411231E-07    9.303634711445058E-08    3.133825152330498E-13    3.343614842343780E-13
+gfc      7     3    2.504640707052502E-07   -2.170820084274791E-07    3.139995715133149E-13    3.204175480413651E-13
+gfc      7     4   -2.749720268850653E-07   -1.240446522400363E-07    3.149447061613556E-13    3.153832734101737E-13
+gfc      7     5    1.651154037179225E-09    1.792923746470203E-08    3.102694830569947E-13    3.252588603937120E-13
+gfc      7     6   -3.588022621705489E-07    1.517918208129299E-07    3.571720546026297E-13    3.376041589975709E-13
+gfc      7     7    1.521492593236923E-09    2.410106904204070E-08    3.904832328553134E-13    4.062832686009692E-13
+gfc      8     0    4.947703305460833E-08    0.000000000000000E+00    2.888852542593746E-13    0.000000000000000E+00
+gfc      8     1    2.312598721902986E-08    5.890809742789708E-08    2.495314786542447E-13    3.059873374085298E-13
+gfc      8     2    8.002518820749569E-08    6.531610926297955E-08    2.762563445853416E-13    3.015307065306912E-13
+gfc      8     3   -1.935571298073086E-08   -8.592570050656207E-08    2.884842865352457E-13    2.856664192984570E-13
+gfc      8     4   -2.443322241000368E-07    6.981262104507604E-08    2.671266103905821E-13    2.953805299236878E-13
+gfc      8     5   -2.569218841938842E-08    8.920748788920739E-08    2.824078108738307E-13    2.795619139360306E-13
+gfc      8     6   -6.597255348985814E-08    3.089491618462768E-07    3.012685963139946E-13    2.634811326739256E-13
+gfc      8     7    6.725461037412625E-08    7.486799497136828E-08    3.154841072236868E-13    2.944700478037431E-13
+gfc      8     8   -1.240360766908782E-07    1.205402270532462E-07    3.184606957980131E-13    3.506989229249204E-13
+gfc      9     0    2.802191419160437E-08    0.000000000000000E+00    2.554201624173862E-13    0.000000000000000E+00
+gfc      9     1    1.421481295184029E-07    2.142935678295637E-08    2.346470006495468E-13    2.800672193432190E-13
+gfc      9     2    2.140658396957457E-08   -3.166602581646140E-08    2.534429482617289E-13    2.566357861319188E-13
+gfc      9     3   -1.606000262597377E-07   -7.423467225643559E-08    2.508250539246933E-13    2.760423174815326E-13
+gfc      9     4   -9.337529320553740E-09    1.989938132492925E-08    2.461051266764749E-13    2.612535136054268E-13
+gfc      9     5   -1.630954514802734E-08   -5.404314134986977E-08    2.545151324817479E-13    2.540321528900153E-13
+gfc      9     6    6.278311111303864E-08    2.229656157251638E-07    2.586454440913061E-13    2.541495192318594E-13
+gfc      9     7   -1.179838541339138E-07   -9.691750257413941E-08    2.540775744022873E-13    2.607837298147992E-13
+gfc      9     8    1.881317927817392E-07   -3.003520135139501E-09    2.686276734664135E-13    2.926574017758137E-13
+gfc      9     9   -4.756061669200505E-08    9.687308959597119E-08    3.103265164163473E-13    3.225303496735903E-13
+gfc     10     0    5.335074308452505E-08    0.000000000000000E+00    2.357967169948693E-13    0.000000000000000E+00
+gfc     10     1    8.374846418754545E-08   -1.310966043108516E-07    2.074458048359592E-13    2.522048223508580E-13
+gfc     10     2   -9.396647080328334E-08   -5.125855785336699E-08    2.168526486220397E-13    2.523987518404926E-13
+gfc     10     3   -6.981332951228843E-09   -1.541130930730565E-07    2.370754695336418E-13    2.345456020409806E-13
+gfc     10     4   -8.444540271390359E-08   -7.902647887833658E-08    2.286532813192819E-13    2.407712228926772E-13
+gfc     10     5   -4.928318134588081E-08   -5.061910524364870E-08    2.298897853455672E-13    2.274951828854823E-13
+gfc     10     6   -3.758649576166859E-08   -7.977024642051621E-08    2.384496928942275E-13    2.213027149388185E-13
+gfc     10     7    8.254984078192664E-09   -3.049282830335415E-09    2.292783930128962E-13    2.301780666215365E-13
+gfc     10     8    4.058811619604778E-08   -9.171131572333481E-08    2.238891454868559E-13    2.444593337411972E-13
+gfc     10     9    1.253890036268319E-07   -3.794396398619023E-08    2.450524388462438E-13    2.690256566056317E-13
+gfc     10    10    1.004229171567117E-07   -2.386310046769263E-08    2.758554180640783E-13    2.655027427269383E-13
+gfc     11     0   -5.076095923890381E-08    0.000000000000000E+00    2.072594285402269E-13    0.000000000000000E+00
+gfc     11     1    1.561718317517641E-08   -2.711785433716982E-08    2.005187220753714E-13    2.301259859600026E-13
+gfc     11     2    2.011476409040234E-08   -9.897753174748232E-08    2.060054728615582E-13    2.118740099722449E-13
+gfc     11     3   -3.057009808703805E-08   -1.488272478895635E-07    2.187619741848727E-13    2.159278510278217E-13
+gfc     11     4   -3.793253980198946E-08   -6.376594319669800E-08    2.029716162918592E-13    2.212626746111682E-13
+gfc     11     5    3.742305477111147E-08    4.958203200542547E-08    2.059873000609726E-13    2.170280345176273E-13
+gfc     11     6   -1.567915071178338E-09    3.427256696734626E-08    2.201992619898488E-13    1.971138821448532E-13
+gfc     11     7    4.657948283150072E-09   -8.982767227974144E-08    2.171718314395348E-13    2.012239577946830E-13
+gfc     11     8   -6.316248565204598E-09    2.454876112383300E-08    2.144024551582771E-13    2.147340414098613E-13
+gfc     11     9   -3.107660016137020E-08    4.206100712999525E-08    2.215335941413348E-13    2.172208305989302E-13
+gfc     11    10   -5.223593243384322E-08   -1.841930674362570E-08    2.296503169871981E-13    2.446736518355424E-13
+gfc     11    11    4.623623560899084E-08   -6.966935062653213E-08    2.707328571893409E-13    2.561099911109541E-13
+gfc     12     0    3.645246193128655E-08    0.000000000000000E+00    1.936334090022195E-13    0.000000000000000E+00
+gfc     12     1   -5.358940972643472E-08   -4.316986564363901E-08    1.715180381133427E-13    2.114687761993179E-13
+gfc     12     2    1.429215140944959E-08    3.110063130179431E-08    1.832328719469034E-13    2.063062123487408E-13
+gfc     12     3    3.964268480563711E-08    2.507351984590942E-08    1.949997134182540E-13    1.903363137152225E-13
+gfc     12     4   -6.771262841179417E-08    3.837943646080413E-09    1.896819112780523E-13    2.044523563865425E-13
+gfc     12     5    3.087547967642321E-08    7.581313203056699E-09    1.991655148592053E-13    1.866611401983996E-13
+gfc     12     6    3.131698246208553E-09    3.898090221306488E-08    1.990840148832457E-13    1.812884288408912E-13
+gfc     12     7   -1.905373499748101E-08    3.572238677765248E-08    1.943359585762300E-13    1.849965405235979E-13
+gfc     12     8   -2.588903224046311E-08    1.693600037098696E-08    1.907939122726415E-13    1.944285999278525E-13
+gfc     12     9    4.190947676227785E-08    2.496060598382675E-08    1.875564838634786E-13    2.039821259717991E-13
+gfc     12    10   -6.200107618033147E-09    3.093522957679540E-08    1.992808915817054E-13    2.052421690134671E-13
+gfc     12    11    1.136722962542185E-08   -6.388759121323609E-09    2.371520931216043E-13    2.178525684888940E-13
+gfc     12    12   -2.419879327573961E-09   -1.111048365779061E-08    2.330946352220784E-13    2.191032038804275E-13
+gfc     13     0    4.172847658378388E-08    0.000000000000000E+00    1.756867031624594E-13    0.000000000000000E+00
+gfc     13     1   -5.143949053852392E-08    3.868235514226728E-08    1.687342565481492E-13    1.878897256530927E-13
+gfc     13     2    5.530551989436672E-08   -6.268221392408390E-08    1.670532847048160E-13    1.851121486068051E-13
+gfc     13     3   -2.155022852253220E-08    9.768557992192841E-08    1.743763487197992E-13    1.828972214624728E-13
+gfc     13     4   -3.635686586962913E-09   -1.175555700352030E-08    1.686905055759239E-13    1.853037553175786E-13

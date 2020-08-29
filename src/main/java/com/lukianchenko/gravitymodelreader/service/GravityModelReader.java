@@ -1,11 +1,13 @@
 package com.lukianchenko.gravitymodelreader.service;
 
 import com.lukianchenko.gravitymodelreader.domain.GravityModel;
+import com.lukianchenko.gravitymodelreader.domain.GravityModelFileRow;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -30,6 +32,7 @@ public class GravityModelReader {
   public GravityModel read() {
     try {
       GravityModel gravityModel = new GravityModel();
+      gravityModel.setModelRows(new HashSet<>());
       FileReader fileReader = new FileReader(file);
       BufferedReader bufferedReader = new BufferedReader(fileReader);
       boolean flag = true;
@@ -43,10 +46,27 @@ public class GravityModelReader {
         readModelParameters(line, gravityModel);
         flag = !StringUtils.startsWithIgnoreCase(line, END_OF_HEAD_STRING);
       }
+
+      String line = "";
+      while ((line = bufferedReader.readLine()) != null && line.length() != 0) {
+        String[] splittedLine = line.split("\\s+");
+        GravityModelFileRow row = new GravityModelFileRow();
+        row.setDegree(Integer.parseInt(splittedLine[1]));
+        row.setOrder(Integer.parseInt(splittedLine[2]));
+        row.degreeCount();
+        row.setCoefficientC(Float.parseFloat(splittedLine[3]));
+        row.setCoefficientS(Float.parseFloat(splittedLine[4]));
+        row.setDC(Float.parseFloat(splittedLine[5]));
+        row.setDS(Float.parseFloat(splittedLine[6]));
+        gravityModel.getModelRows().add(row);
+        System.out.println(row.getRowNumber());
+      }
+
       System.out.println(gravityModel.getName());
       System.out.println(gravityModel.getEarthGravityConstant());
       System.out.println(gravityModel.getRadius());
       System.out.println(gravityModel.getMaxDegree());
+      System.out.println(gravityModel.getModelRows().size());
 
     } catch (FileNotFoundException e) {
       e.printStackTrace();
@@ -57,7 +77,6 @@ public class GravityModelReader {
   }
 
   private void readModelParameters(String line, GravityModel gravityModel) {
-
     if (!StringUtils.isEmpty(line)) {
       String[] splittedString = line.split("\\s+");
       String splittedKey = StringUtils.trimAllWhitespace(splittedString[0]);

@@ -1,7 +1,11 @@
 package com.lukianchenko.gravitymodelreader.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
 @NoArgsConstructor
 public class GravityModelFileRow {
 
@@ -21,10 +25,10 @@ public class GravityModelFileRow {
     this.coefficientS = coefficientS;
     this.dC = dC;
     this.dS = dS;
-    this.rowNumber = degreeCount(degree);
+    degreeCount();
   }
 
-  private int degreeCount(int degree) {
-    return degree * (degree + 1) / 2 + 1;
+  public void degreeCount() {
+    this.rowNumber = degree * (degree + 1) / 2 + 1 + order;
   }
 }

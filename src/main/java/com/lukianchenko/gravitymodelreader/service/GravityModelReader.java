@@ -8,11 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
+@Slf4j
 public class GravityModelReader {
 
   private final static String BEGIN_OF_HEAD_STRING = "begin_of_head";
@@ -37,26 +39,27 @@ public class GravityModelReader {
   }
 
   public GravityModel read() {
-    try {
+    try (FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader)) {
       GravityModel gravityModel = new GravityModel();
       gravityModel.setModelRows(new HashSet<>());
-      FileReader fileReader = new FileReader(file);
-      BufferedReader bufferedReader = new BufferedReader(fileReader);
 
       skipModelInfo(bufferedReader);
       readModelMetData(gravityModel, bufferedReader);
       readMainRowsWithCoefficients(gravityModel, bufferedReader);
 
-      System.out.println(gravityModel.getName());
-      System.out.println(gravityModel.getEarthGravityConstant());
-      System.out.println(gravityModel.getRadius());
-      System.out.println(gravityModel.getMaxDegree());
-      System.out.println(gravityModel.getModelRows().size());
+      log.info(gravityModel.getName());
+      log.info(String.valueOf(gravityModel.getEarthGravityConstant()));
+      log.info(String.valueOf(gravityModel.getRadius()));
+      log.info(String.valueOf(gravityModel.getMaxDegree()));
+      log.info(String.valueOf(gravityModel.getModelRows().size()));
+
+      return gravityModel;
 
     } catch (FileNotFoundException e) {
-      System.out.println("Gravity model file not found");
+      log.error("Gravity model file not found");
     } catch (IOException e) {
-      System.out.println("Failed to read gravity model file");
+      log.error("Failed to read gravity model file");
     }
     return null;
   }
@@ -112,7 +115,7 @@ public class GravityModelReader {
       row.setDC(Float.parseFloat(splittedLine[DC_ORDER_IN_ROW]));
       row.setDS(Float.parseFloat(splittedLine[DS_ORDER_IN_ROW]));
       gravityModel.getModelRows().add(row);
-      System.out.println(row.getRowNumber());
+//      log.info(String.valueOf(row.getRowNumber()));
     }
   }
 }

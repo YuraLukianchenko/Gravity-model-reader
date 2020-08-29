@@ -23,6 +23,13 @@ public class GravityModelReader {
   private final static String RADIUS_STRING = "radius";
   private final static String MAX_DEGREE_STRING = "max_degree";
 
+  private final static int DEGREE_ORDER_IN_ROW = 1;
+  private final static int ORDER_ORDER_IN_ROW = 2;
+  private final static int COEFFICIENT_C_ORDER_IN_ROW = 3;
+  private final static int COEFFICIENT_S_ORDER_IN_ROW = 4;
+  private final static int DC_ORDER_IN_ROW = 5;
+  private final static int DS_ORDER_IN_ROW = 6;
+
   private File file;
 
   public GravityModelReader(@Value("${file-name}") String filePath) {
@@ -35,32 +42,10 @@ public class GravityModelReader {
       gravityModel.setModelRows(new HashSet<>());
       FileReader fileReader = new FileReader(file);
       BufferedReader bufferedReader = new BufferedReader(fileReader);
-      boolean flag = true;
-      while (flag) {
-        String line = bufferedReader.readLine();
-        flag = !StringUtils.startsWithIgnoreCase(line, BEGIN_OF_HEAD_STRING);
-      }
-      flag = true;
-      while (flag) {
-        String line = bufferedReader.readLine();
-        readModelParameters(line, gravityModel);
-        flag = !StringUtils.startsWithIgnoreCase(line, END_OF_HEAD_STRING);
-      }
 
-      String line = "";
-      while ((line = bufferedReader.readLine()) != null && line.length() != 0) {
-        String[] splittedLine = line.split("\\s+");
-        GravityModelFileRow row = new GravityModelFileRow();
-        row.setDegree(Integer.parseInt(splittedLine[1]));
-        row.setOrder(Integer.parseInt(splittedLine[2]));
-        row.degreeCount();
-        row.setCoefficientC(Float.parseFloat(splittedLine[3]));
-        row.setCoefficientS(Float.parseFloat(splittedLine[4]));
-        row.setDC(Float.parseFloat(splittedLine[5]));
-        row.setDS(Float.parseFloat(splittedLine[6]));
-        gravityModel.getModelRows().add(row);
-        System.out.println(row.getRowNumber());
-      }
+      skipModelInfo(bufferedReader);
+      readModelMetData(gravityModel, bufferedReader);
+      readMainRowsWithCoefficients(gravityModel, bufferedReader);
 
       System.out.println(gravityModel.getName());
       System.out.println(gravityModel.getEarthGravityConstant());
@@ -69,33 +54,65 @@ public class GravityModelReader {
       System.out.println(gravityModel.getModelRows().size());
 
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      System.out.println("Gravity model file not found");
     } catch (IOException e) {
-      e.printStackTrace();
+      System.out.println("Failed to read gravity model file");
     }
     return null;
   }
 
-  private void readModelParameters(String line, GravityModel gravityModel) {
-    if (!StringUtils.isEmpty(line)) {
-      String[] splittedString = line.split("\\s+");
-      String splittedKey = StringUtils.trimAllWhitespace(splittedString[0]);
-      String splittedValue = StringUtils.trimAllWhitespace(splittedString[1]);
+  private void readModelMetData(GravityModel gravityModel, BufferedReader bufferedReader)
+      throws IOException {
+    boolean flag = true;
+    while (flag) {
+      String line = bufferedReader.readLine();
+      if (!StringUtils.isEmpty(line)) {
+        String[] splittedString = line.split("\\s+");
+        String splittedKey = StringUtils.trimAllWhitespace(splittedString[0]);
+        String splittedValue = StringUtils.trimAllWhitespace(splittedString[1]);
 
-      switch (splittedKey) {
-        case MODEL_NAME_STRING:
-          gravityModel.setName(splittedValue);
-          break;
-        case EARTH_GRAVITY_CONSTANT_STRING:
-          gravityModel.setEarthGravityConstant(Float.parseFloat(splittedValue));
-          break;
-        case RADIUS_STRING:
-          gravityModel.setRadius(Float.parseFloat(splittedValue));
-          break;
-        case MAX_DEGREE_STRING:
-          gravityModel.setMaxDegree(Integer.parseInt(splittedValue));
-          break;
+        switch (splittedKey) {
+          case MODEL_NAME_STRING:
+            gravityModel.setName(splittedValue);
+            break;
+          case EARTH_GRAVITY_CONSTANT_STRING:
+            gravityModel.setEarthGravityConstant(Float.parseFloat(splittedValue));
+            break;
+          case RADIUS_STRING:
+            gravityModel.setRadius(Float.parseFloat(splittedValue));
+            break;
+          case MAX_DEGREE_STRING:
+            gravityModel.setMaxDegree(Integer.parseInt(splittedValue));
+            break;
+        }
       }
+      flag = !StringUtils.startsWithIgnoreCase(line, END_OF_HEAD_STRING);
+    }
+  }
+
+  private void skipModelInfo(BufferedReader bufferedReader) throws IOException {
+    boolean flag = true;
+    while (flag) {
+      String line = bufferedReader.readLine();
+      flag = !StringUtils.startsWithIgnoreCase(line, BEGIN_OF_HEAD_STRING);
+    }
+  }
+
+  private void readMainRowsWithCoefficients(GravityModel gravityModel,
+      BufferedReader bufferedReader) throws IOException {
+    String line;
+    while ((line = bufferedReader.readLine()) != null && line.length() != 0) {
+      String[] splittedLine = line.split("\\s+");
+      GravityModelFileRow row = new GravityModelFileRow();
+      row.setDegree(Integer.parseInt(splittedLine[DEGREE_ORDER_IN_ROW]));
+      row.setOrder(Integer.parseInt(splittedLine[ORDER_ORDER_IN_ROW]));
+      row.degreeCount();
+      row.setCoefficientC(Float.parseFloat(splittedLine[COEFFICIENT_C_ORDER_IN_ROW]));
+      row.setCoefficientS(Float.parseFloat(splittedLine[COEFFICIENT_S_ORDER_IN_ROW]));
+      row.setDC(Float.parseFloat(splittedLine[DC_ORDER_IN_ROW]));
+      row.setDS(Float.parseFloat(splittedLine[DS_ORDER_IN_ROW]));
+      gravityModel.getModelRows().add(row);
+      System.out.println(row.getRowNumber());
     }
   }
 }

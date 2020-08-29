@@ -1,5 +1,6 @@
 package com.lukianchenko.gravitymodelreader.controller;
 
+import com.lukianchenko.gravitymodelreader.domain.GravityModel;
 import com.lukianchenko.gravitymodelreader.service.GravityModelReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ public class MainController {
   @GetMapping("/greetings")
   public ModelAndView greetings() {
 
-    gravityModelReader.read();
+    GravityModel gravityModel = gravityModelReader.read();
 
     ModelAndView mav = new ModelAndView();
     mav.addObject("line", "done");

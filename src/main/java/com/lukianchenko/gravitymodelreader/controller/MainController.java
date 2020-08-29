@@ -17,10 +17,10 @@ public class MainController {
   @GetMapping("/greetings")
   public ModelAndView greetings() {
 
-    String line = gravityModelReader.readLine();
+    gravityModelReader.read();
 
     ModelAndView mav = new ModelAndView();
-    mav.addObject("line", line);
+    mav.addObject("line", "done");
     return mav;
   }
 

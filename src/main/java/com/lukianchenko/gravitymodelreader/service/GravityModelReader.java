@@ -34,11 +34,12 @@ public class GravityModelReader {
 
   private File file;
 
-  public GravityModelReader(@Value("${file-name}") String filePath) {
-    file = new File(filePath);
+  public GravityModelReader() {
+
   }
 
-  public GravityModel read() {
+  public GravityModel read(String filePath) {
+    file = new File(filePath);
     try (FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader)) {
       GravityModel gravityModel = new GravityModel();

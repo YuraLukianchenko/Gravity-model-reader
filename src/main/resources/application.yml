@@ -1,2 +1,7 @@
-file-name: c:\Users\Yura\Downloads\XGM2019e.gfc
-#file-name: C:\Users\Yura\IdeaProjects\Gravity-model-reader\Gravity-model-reader\src\main\resources\gravity-models\gravity-model-mini-for-tests.txt
+#file-name: c:\Users\Yura\Downloads\XGM2019e.gfc
+#file-name: C:\Users\Yura\IdeaProjects\Gravity-model-reader\Gravity-model-reader\src\main\resources\gmodels\gravitymodelminifortests.txt
+
+model-file-names:
+  etalon: src\main\resources\gmodels\EIGEN-6C4.gfc
+  compared: src\main\resources\gmodels\XGM2019e_2159.gfc
+  spectralAmplitudes: src\main\resources\gmodels\spectralAmplitudes2190.txt

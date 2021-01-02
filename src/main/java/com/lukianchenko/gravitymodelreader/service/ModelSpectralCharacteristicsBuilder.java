@@ -9,32 +9,59 @@ import java.io.IOException;
 
 public class ModelSpectralCharacteristicsBuilder {
 
-  public void buildAndSaveToFile(GravityModel gravityModel, String filePath) {
+  public void buildAndSaveToFile(GravityModel etalonGravityModel,
+      GravityModel comparedGravityModel,
+      String filePath) {
     File file = new File(filePath);
     try (FileWriter fileWriter = new FileWriter(file);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-      int modelDegree = gravityModel.getMaxDegree();
-      float[] spectralAmplitudes = new float[modelDegree + 1];
-      GravityModelFileRow[] rows = new GravityModelFileRow[(modelDegree + 1) * (modelDegree + 2) / 2
-          + 1];
-      gravityModel.getModelRows().stream().forEach(row -> rows[row.getRowNumber()] = row);
-      for (int i = 0; i < spectralAmplitudes.length; i++) {
+      int etalonModelDegree = etalonGravityModel.getMaxDegree();
+      int comparedModelDegree = comparedGravityModel.getMaxDegree();
+      double[] etalonSpectralAmplitudes = new double[etalonModelDegree + 1];
+      double[] comparedSpectralAmplitudes = new double[comparedModelDegree + 1];
+      double[] differences = new double[comparedModelDegree + 1];
+      double[] acumulateDifferencesOfSpectralAmplitudes = new double[comparedModelDegree + 1];
+
+      GravityModelFileRow[] etalonRows = new GravityModelFileRow[
+          (etalonModelDegree + 1) * (etalonModelDegree + 2) / 2 + 1];
+      GravityModelFileRow[] comparedRows = new GravityModelFileRow[
+          (comparedModelDegree + 1) * (comparedModelDegree + 2) / 2 + 1];
+
+      etalonGravityModel.getModelRows()
+          .forEach(row -> etalonRows[row.getRowNumber()] = row);
+      comparedGravityModel.getModelRows()
+          .forEach(row -> comparedRows[row.getRowNumber()] = row);
+
+      int commonModelDegree =
+          etalonModelDegree >= comparedModelDegree ? comparedModelDegree : etalonModelDegree;
+
+      for (int i = 0; i < commonModelDegree; i++) {
         for (int j = 0; j <= i; j++) {
-          spectralAmplitudes[i] += Math.sqrt(
-              Math.pow(rows[lineNumber(i, j)].getCoefficientC(), 2) +
-                  Math.pow(rows[lineNumber(i, j)].getCoefficientS(), 2));
+          etalonSpectralAmplitudes[i] +=
+              Math.pow(etalonRows[lineNumber(i, j)].getCoefficientC(), 2) +
+                  Math.pow(etalonRows[lineNumber(i, j)].getCoefficientS(), 2);
+          comparedSpectralAmplitudes[i] +=
+              Math.pow(comparedRows[lineNumber(i, j)].getCoefficientC(), 2) +
+                  Math.pow(comparedRows[lineNumber(i, j)].getCoefficientS(), 2);
+          differences[i] += Math.pow(
+              (etalonRows[lineNumber(i, j)].getCoefficientC() - comparedRows[lineNumber(i, j)]
+                  .getCoefficientC()), 2) +
+              Math.pow(
+                  (etalonRows[lineNumber(i, j)].getCoefficientS() - comparedRows[lineNumber(i, j)]
+                      .getCoefficientS()), 2);
         }
-        bufferedWriter.write(i + " " + spectralAmplitudes[i] * gravityModel.getRadius());
+        acumulateDifferencesOfSpectralAmplitudes[i] = Math.sqrt(differences[i]) + (i == 0 ? 0
+            : acumulateDifferencesOfSpectralAmplitudes[i - 1]);
+        bufferedWriter.write(
+            i + " " + Math.sqrt(etalonSpectralAmplitudes[i]) * etalonGravityModel.getRadius() +
+                " " + Math.sqrt(comparedSpectralAmplitudes[i]) * comparedGravityModel.getRadius() +
+                " " + Math.sqrt(differences[i]) * comparedGravityModel.getRadius() +
+                " " + acumulateDifferencesOfSpectralAmplitudes[i] * etalonGravityModel.getRadius());
         bufferedWriter.newLine();
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
-  }
-
-  public void buildAndSaveToFile(GravityModel gravityModel1, GravityModel gravityModel2,
-      String filePath) {
-
   }
 
   private int lineNumber(int degree, int order) {

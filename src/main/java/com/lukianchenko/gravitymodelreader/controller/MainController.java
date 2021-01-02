@@ -1,5 +1,6 @@
 package com.lukianchenko.gravitymodelreader.controller;
 
+import com.lukianchenko.gravitymodelreader.configuration.FileNameProperties;
 import com.lukianchenko.gravitymodelreader.domain.GravityModel;
 import com.lukianchenko.gravitymodelreader.service.GravityModelReader;
 import com.lukianchenko.gravitymodelreader.service.ModelSpectralCharacteristicsBuilder;
@@ -11,18 +12,24 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
   private GravityModelReader gravityModelReader;
+  private FileNameProperties fileNameProperties;
 
-  public MainController(GravityModelReader gravityModelReader) {
+  public MainController(GravityModelReader gravityModelReader,
+      FileNameProperties fileNameProperties) {
     this.gravityModelReader = gravityModelReader;
+    this.fileNameProperties = fileNameProperties;
   }
 
   @GetMapping("/greetings")
   public ModelAndView greetings() {
+//@Value("${file-name}")
+    GravityModel etalonGravityModel = gravityModelReader.read(fileNameProperties.getEtalon());
+    GravityModel comparedGravityModel = gravityModelReader.read(fileNameProperties.getCompared());
 
-    GravityModel gravityModel = gravityModelReader.read();
     ModelSpectralCharacteristicsBuilder characteristicsBuilder = new ModelSpectralCharacteristicsBuilder();
-    characteristicsBuilder.buildAndSaveToFile(gravityModel,
-        "C:\\Users\\Yura\\IdeaProjects\\Gravity-model-reader\\Gravity-model-reader\\src\\main\\resources\\gravity-models\\characteristics.txt");
+    characteristicsBuilder.buildAndSaveToFile(etalonGravityModel,
+        comparedGravityModel,
+        fileNameProperties.getSpectralAmplitudes());
 
     ModelAndView mav = new ModelAndView();
     mav.addObject("line", "done");

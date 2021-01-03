@@ -14,17 +14,17 @@ public class GravityModelFileRow {
   private int order;
   private float coefficientC;
   private float coefficientS;
-  private float dC;
-  private float dS;
+  private float diffC;
+  private float diffS;
 
   public GravityModelFileRow(int degree, int order, float coefficientC,
-      float coefficientS, float dC, float dS) {
+      float coefficientS, float diffC, float diffS) {
     this.degree = degree;
     this.order = order;
     this.coefficientC = coefficientC;
     this.coefficientS = coefficientS;
-    this.dC = dC;
-    this.dS = dS;
+    this.diffC = diffC;
+    this.diffS = diffS;
     degreeCount();
   }
 

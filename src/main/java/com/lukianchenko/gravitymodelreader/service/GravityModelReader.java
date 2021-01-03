@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -113,8 +112,8 @@ public class GravityModelReader {
       row.degreeCount();
       row.setCoefficientC(Float.parseFloat(splittedLine[COEFFICIENT_C_ORDER_IN_ROW]));
       row.setCoefficientS(Float.parseFloat(splittedLine[COEFFICIENT_S_ORDER_IN_ROW]));
-      row.setDC(Float.parseFloat(splittedLine[DC_ORDER_IN_ROW]));
-      row.setDS(Float.parseFloat(splittedLine[DS_ORDER_IN_ROW]));
+      row.setDiffC(Float.parseFloat(splittedLine[DC_ORDER_IN_ROW]));
+      row.setDiffS(Float.parseFloat(splittedLine[DS_ORDER_IN_ROW]));
       gravityModel.getModelRows().add(row);
 //      log.info(String.valueOf(row.getRowNumber()));
     }

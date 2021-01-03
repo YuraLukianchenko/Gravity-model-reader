@@ -67,11 +67,17 @@
           </dependency>
         </dependencies>
         <configuration>
+          <configLocation>google_checks.xml</configLocation>
+          <encoding>UTF-8</encoding>
+          <consoleOutput>true</consoleOutput>
           <failsOnError>true</failsOnError>
-          <configLocation>checkstyle.xml</configLocation>
+          <violationSeverity>warning</violationSeverity>
+          <linkXRef>false</linkXRef>
         </configuration>
         <executions>
           <execution>
+            <id>validate</id>
+            <phase>validate</phase>
             <goals>
               <goal>check</goal>
             </goals>

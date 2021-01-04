@@ -6,6 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+/**
+ * This is simple pojo for gravity field model.
+ *
+ * @author Yura
+ */
 @Getter
 @Setter
 @NoArgsConstructor

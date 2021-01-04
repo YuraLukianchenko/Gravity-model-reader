@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MainController {
+class MainController {
 
-  private GravityModelReader gravityModelReader;
-  private FileNameProperties fileNameProperties;
+  private final GravityModelReader gravityModelReader;
+  private final FileNameProperties fileNameProperties;
 
   public MainController(GravityModelReader gravityModelReader,
       FileNameProperties fileNameProperties) {
@@ -22,12 +22,13 @@ public class MainController {
 
   @GetMapping("/greetings")
   public ModelAndView greetings() {
-//@Value("${file-name}")
-    GravityModel etalonGravityModel = gravityModelReader.read(fileNameProperties.getEtalon());
+
+    GravityModel standardGravityModel = gravityModelReader.read(fileNameProperties.getStandard());
     GravityModel comparedGravityModel = gravityModelReader.read(fileNameProperties.getCompared());
 
-    ModelSpectralCharacteristicsBuilder characteristicsBuilder = new ModelSpectralCharacteristicsBuilder();
-    characteristicsBuilder.buildAndSaveToFile(etalonGravityModel,
+    ModelSpectralCharacteristicsBuilder characteristicsBuilder =
+        new ModelSpectralCharacteristicsBuilder();
+    characteristicsBuilder.buildAndSaveToFile(standardGravityModel,
         comparedGravityModel,
         fileNameProperties.getSpectralAmplitudes());
 
@@ -35,5 +36,4 @@ public class MainController {
     mav.addObject("line", "done");
     return mav;
   }
-
 }

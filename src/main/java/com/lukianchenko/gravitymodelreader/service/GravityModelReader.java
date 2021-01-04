@@ -12,33 +12,43 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+/**
+ * This is service for reading files with gravity field model.
+ *
+ * @author Yura
+ */
 @Service
 @Slf4j
 public class GravityModelReader {
 
-  private final static String BEGIN_OF_HEAD_STRING = "begin_of_head";
-  private final static String END_OF_HEAD_STRING = "end_of_head";
+  private static final String BEGIN_OF_HEAD_STRING = "begin_of_head";
+  private static final String END_OF_HEAD_STRING = "end_of_head";
 
-  private final static String MODEL_NAME_STRING = "modelname";
-  private final static String EARTH_GRAVITY_CONSTANT_STRING = "earth_gravity_constant";
-  private final static String RADIUS_STRING = "radius";
-  private final static String MAX_DEGREE_STRING = "max_degree";
+  private static final String MODEL_NAME_STRING = "model_name";
+  private static final String EARTH_GRAVITY_CONSTANT_STRING = "earth_gravity_constant";
+  private static final String RADIUS_STRING = "radius";
+  private static final String MAX_DEGREE_STRING = "max_degree";
 
-  private final static int DEGREE_ORDER_IN_ROW = 1;
-  private final static int ORDER_ORDER_IN_ROW = 2;
-  private final static int COEFFICIENT_C_ORDER_IN_ROW = 3;
-  private final static int COEFFICIENT_S_ORDER_IN_ROW = 4;
-  private final static int DC_ORDER_IN_ROW = 5;
-  private final static int DS_ORDER_IN_ROW = 6;
+  private static final int DEGREE_ORDER_IN_ROW = 1;
+  private static final int ORDER_ORDER_IN_ROW = 2;
+  private static final int COEFFICIENT_C_ORDER_IN_ROW = 3;
+  private static final int COEFFICIENT_S_ORDER_IN_ROW = 4;
+  private static final int DC_ORDER_IN_ROW = 5;
+  private static final int DS_ORDER_IN_ROW = 6;
 
-  private File file;
-
-  public GravityModelReader() {
+  private GravityModelReader() {
 
   }
 
+  /**
+   * Method which reads gravity model file.
+   *
+   * @param filePath path to gravity field model;
+   * @return GravityModel
+   * @author Yura
+   */
   public GravityModel read(String filePath) {
-    file = new File(filePath);
+    File file = new File(filePath);
     try (FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader)) {
       GravityModel gravityModel = new GravityModel();
@@ -70,23 +80,25 @@ public class GravityModelReader {
     while (flag) {
       String line = bufferedReader.readLine();
       if (!StringUtils.isEmpty(line)) {
-        String[] splittedString = line.split("\\s+");
-        String splittedKey = StringUtils.trimAllWhitespace(splittedString[0]);
-        String splittedValue = StringUtils.trimAllWhitespace(splittedString[1]);
+        String[] separatedStrings = line.split("\\s+");
+        String key = StringUtils.trimAllWhitespace(separatedStrings[0]);
+        String value = StringUtils.trimAllWhitespace(separatedStrings[1]);
 
-        switch (splittedKey) {
+        switch (key) {
           case MODEL_NAME_STRING:
-            gravityModel.setName(splittedValue);
+            gravityModel.setName(value);
             break;
           case EARTH_GRAVITY_CONSTANT_STRING:
-            gravityModel.setEarthGravityConstant(Float.parseFloat(splittedValue));
+            gravityModel.setEarthGravityConstant(Float.parseFloat(value));
             break;
           case RADIUS_STRING:
-            gravityModel.setRadius(Float.parseFloat(splittedValue));
+            gravityModel.setRadius(Float.parseFloat(value));
             break;
           case MAX_DEGREE_STRING:
-            gravityModel.setMaxDegree(Integer.parseInt(splittedValue));
+            gravityModel.setMaxDegree(Integer.parseInt(value));
             break;
+          default:
+            throw new RuntimeException();
         }
       }
       flag = !StringUtils.startsWithIgnoreCase(line, END_OF_HEAD_STRING);
@@ -115,7 +127,6 @@ public class GravityModelReader {
       row.setDiffC(Float.parseFloat(splittedLine[DC_ORDER_IN_ROW]));
       row.setDiffS(Float.parseFloat(splittedLine[DS_ORDER_IN_ROW]));
       gravityModel.getModelRows().add(row);
-//      log.info(String.valueOf(row.getRowNumber()));
     }
   }
 }

@@ -57,11 +57,11 @@ public class ModelSpectralCharacteristicsBuilder {
               Math.pow(comparedRows[lineNumber(i, j)].getCoefficientC(), 2)
                   + Math.pow(comparedRows[lineNumber(i, j)].getCoefficientS(), 2);
           differences[i] += Math.pow(
-              (etalonRows[lineNumber(i, j)].getCoefficientC() - comparedRows[lineNumber(i, j)]
-                  .getCoefficientC()), 2)
+              etalonRows[lineNumber(i, j)].getCoefficientC() - comparedRows[lineNumber(i, j)]
+                  .getCoefficientC(), 2)
               + Math.pow(
-              (etalonRows[lineNumber(i, j)].getCoefficientS() - comparedRows[lineNumber(i, j)]
-                  .getCoefficientS()), 2);
+              etalonRows[lineNumber(i, j)].getCoefficientS() - comparedRows[lineNumber(i, j)]
+                  .getCoefficientS(), 2);
         }
         accumulatedDifferencesOfSpectralAmplitudes[i] = Math.sqrt(differences[i]) + (i == 0 ? 0
             : accumulatedDifferencesOfSpectralAmplitudes[i - 1]);

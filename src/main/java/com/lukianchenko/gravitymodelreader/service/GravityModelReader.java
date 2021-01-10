@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class GravityModelReader {
    */
   public GravityModel read(String filePath) {
     File file = new File(filePath);
-    try (FileReader fileReader = new FileReader(file);
+    try (FileReader fileReader = new FileReader(file, StandardCharsets.UTF_8);
         BufferedReader bufferedReader = new BufferedReader(fileReader)) {
       GravityModel gravityModel = new GravityModel();
       gravityModel.setModelRows(new HashSet<>());

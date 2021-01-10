@@ -18,6 +18,7 @@
   <properties>
     <java.version>11</java.version>
     <check-style-version>3.1.1</check-style-version>
+    <pmd-version>3.14.0</pmd-version>
   </properties>
 
   <dependencies>
@@ -80,6 +81,19 @@
             <phase>validate</phase>
             <goals>
               <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>${pmd-version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+              <goal>cpd-check</goal>
             </goals>
           </execution>
         </executions>
